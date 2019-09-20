@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+
+    <context:component-scan base-package="com.wxplatform.controller">
+    <context:include-filter type="annotation"
+                            expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+    <!--aop解析器-->
+    <aop:aspectj-autoproxy/>
+    <!--mvc的注解解析器-->
+    <mvc:annotation-driven/>
+    <!--开通静态资源访问-->
+    <mvc:default-servlet-handler/>
+
+    <!--视图定位-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--上传的文件解析-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+
+    <!--<bean id="aop" class="common.aop.ControllerAop"/>-->
+    <!--<aop:config>-->
+        <!--<aop:aspect id="myaop" ref="aop">-->
+            <!--<aop:pointcut id="target"-->
+                         <!--expression="execution(public common.beans.ResultBean *(..))"/>-->
+            <!--<aop:around method="handlerControllerMethod" pointcut-ref="target" />-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+
+    <!-- 国际化信息 -->
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="useCodeAsDefaultMessage" value="true" />
+        <property name="basenames" value="message"/>
+
+    </bean>
+    <bean
+    class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="staticMethod" value="common.utils.NotNullCheckUtils.setMessageSource" />
+    <!-- 这里配置参数 -->
+    <property name="arguments" ref="messageSource">
+    </property>
+    </bean>
+
+    <!--failException配置-->
+    <bean
+    class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="staticMethod" value="common.utils.FailCheckUtils.setMessageSource" />
+    <!-- 这里配置参数 -->
+    <property name="arguments" ref="messageSource">
+    </property>
+    </bean>
+    <!--<mvc:interceptors>-->
+    <!--&lt;!&ndash;对所有的请求记性拦截&ndash;&gt;-->
+    <!--&lt;!&ndash;<beans:bean class="com.sunp.common.interceptor.Myinterceptor"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;对特定的请求进行拦截&ndash;&gt;-->
+    <!--<mvc:interceptor>-->
+        <!--<mvc:mapping path="/txbackstage/*"/>-->
+        <!--<mvc:mapping path="/txbackstagedatetrip/*"/>-->
+        <!--<mvc:exclude-mapping path="/txplatform/*"/>-->
+        <!--<mvc:exclude-mapping path="/txbackstage/login"/>-->
+    <!--</mvc:interceptor>-->
+<!--</mvc:interceptors>-->
+
+</beans>

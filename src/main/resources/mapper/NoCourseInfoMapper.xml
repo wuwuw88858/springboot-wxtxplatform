@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxplatform.mapper.NoCourseInfoMapper">
+  <resultMap id="BaseResultMap" type="com.wxplatform.pojo.NoCourseInfo">
+    <result column="memberid" jdbcType="VARCHAR" property="memberid" />
+    <result column="membername" jdbcType="VARCHAR" property="membername" />
+    <result column="departmentid" jdbcType="INTEGER" property="departmentid" />
+    <result column="course1" jdbcType="VARCHAR" property="course1" />
+    <result column="course2" jdbcType="VARCHAR" property="course2" />
+    <result column="course3" jdbcType="VARCHAR" property="course3" />
+    <result column="course4" jdbcType="VARCHAR" property="course4" />
+    <result column="course5" jdbcType="VARCHAR" property="course5" />
+    <result column="course6" jdbcType="VARCHAR" property="course6" />
+    <result column="course7" jdbcType="VARCHAR" property="course7" />
+    <result column="course8" jdbcType="VARCHAR" property="course8" />
+    <result column="course9" jdbcType="VARCHAR" property="course9" />
+    <result column="course10" jdbcType="VARCHAR" property="course10" />
+    <result column="course11" jdbcType="VARCHAR" property="course11" />
+    <result column="course12" jdbcType="VARCHAR" property="course12" />
+    <result column="course13" jdbcType="VARCHAR" property="course13" />
+    <result column="course14" jdbcType="VARCHAR" property="course14" />
+    <result column="course15" jdbcType="VARCHAR" property="course15" />
+    <result column="course16" jdbcType="VARCHAR" property="course16" />
+    <result column="course17" jdbcType="VARCHAR" property="course17" />
+    <result column="course18" jdbcType="VARCHAR" property="course18" />
+    <result column="course19" jdbcType="VARCHAR" property="course19" />
+    <result column="course20" jdbcType="VARCHAR" property="course20" />
+    <result column="course21" jdbcType="VARCHAR" property="course21" />
+    <result column="course22" jdbcType="VARCHAR" property="course22" />
+    <result column="course23" jdbcType="VARCHAR" property="course23" />
+    <result column="course24" jdbcType="VARCHAR" property="course24" />
+    <result column="course25" jdbcType="VARCHAR" property="course25" />
+    <result column="course26" jdbcType="VARCHAR" property="course26" />
+    <result column="course27" jdbcType="VARCHAR" property="course27" />
+    <result column="course28" jdbcType="VARCHAR" property="course28" />
+    <result column="course29" jdbcType="VARCHAR" property="course29" />
+    <result column="course30" jdbcType="VARCHAR" property="course30" />
+    <result column="course31" jdbcType="VARCHAR" property="course31" />
+    <result column="course32" jdbcType="VARCHAR" property="course32" />
+    <result column="course33" jdbcType="VARCHAR" property="course33" />
+    <result column="course34" jdbcType="VARCHAR" property="course34" />
+    <result column="course35" jdbcType="VARCHAR" property="course35" />
+    <result column="course36" jdbcType="VARCHAR" property="course36" />
+    <result column="course37" jdbcType="VARCHAR" property="course37" />
+    <result column="course38" jdbcType="VARCHAR" property="course38" />
+    <result column="course39" jdbcType="VARCHAR" property="course39" />
+    <result column="course40" jdbcType="VARCHAR" property="course40" />
+    <result column="course41" jdbcType="VARCHAR" property="course41" />
+    <result column="course42" jdbcType="VARCHAR" property="course42" />
+    <result column="course43" jdbcType="VARCHAR" property="course43" />
+    <result column="course44" jdbcType="VARCHAR" property="course44" />
+    <result column="course45" jdbcType="VARCHAR" property="course45" />
+    <result column="course46" jdbcType="VARCHAR" property="course46" />
+    <result column="course47" jdbcType="VARCHAR" property="course47" />
+    <result column="course48" jdbcType="VARCHAR" property="course48" />
+    <result column="course49" jdbcType="VARCHAR" property="course49" />
+    <result column="course50" jdbcType="VARCHAR" property="course50" />
+    <result column="course51" jdbcType="VARCHAR" property="course51" />
+    <result column="course52" jdbcType="VARCHAR" property="course52" />
+    <result column="course53" jdbcType="VARCHAR" property="course53" />
+    <result column="course54" jdbcType="VARCHAR" property="course54" />
+    <result column="course55" jdbcType="VARCHAR" property="course55" />
+    <result column="course56" jdbcType="VARCHAR" property="course56" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    memberid, membername, departmentid, course1, course2, course3, course4, course5, 
+    course6, course7, course8, course9, course10, course11, course12, course13, course14, 
+    course15, course16, course17, course18, course19, course20, course21, course22, course23, 
+    course24, course25, course26, course27, course28, course29, course30, course31, course32, 
+    course33, course34, course35, course36, course37, course38, course39, course40, course41, 
+    course42, course43, course44, course45, course46, course47, course48, course49, course50, 
+    course51, course52, course53, course54, course55, course56
+  </sql>
+  <select id="selectByExample" parameterType="com.wxplatform.pojo.NoCourseInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from nocourse
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectAllCourseInfo" resultMap="BaseResultMap">
+    SELECT * from nocourse where departmentid = #{departmentid, jdbcType=INTEGER}
+  </select>
+
+  <select id="selectCountbymemberId" resultType="java.lang.Integer">
+    select count(*) count from nocourse where memberid = #{memberid, jdbcType=VARCHAR}
+  </select>
+  <select id="selectCountbydepartment" resultType="java.lang.Integer">
+    select count(*) count from nocourse where departmentid = #{departmentid, jdbcType=INTEGER}
+  </select>
+
+  <insert id="insertAllCourseInfo" parameterType="com.wxplatform.pojo.NoCourseInfo">
+    insert into nocourse (memberid, membername, departmentid, 
+      course1, course2, course3, 
+      course4, course5, course6, 
+      course7, course8, course9, 
+      course10, course11, course12, 
+      course13, course14, course15, 
+      course16, course17, course18, 
+      course19, course20, course21, 
+      course22, course23, course24, 
+      course25, course26, course27, 
+      course28, course29, course30, 
+      course31, course32, course33, 
+      course34, course35, course36, 
+      course37, course38, course39, 
+      course40, course41, course42, 
+      course43, course44, course45, 
+      course46, course47, course48, 
+      course49, course50, course51, 
+      course52, course53, course54, 
+      course55, course56)
+    values (#{memberid,jdbcType=VARCHAR}, #{membername,jdbcType=VARCHAR}, #{departmentid,jdbcType=INTEGER}, 
+      #{course1,jdbcType=VARCHAR}, #{course2,jdbcType=VARCHAR}, #{course3,jdbcType=VARCHAR}, 
+      #{course4,jdbcType=VARCHAR}, #{course5,jdbcType=VARCHAR}, #{course6,jdbcType=VARCHAR}, 
+      #{course7,jdbcType=VARCHAR}, #{course8,jdbcType=VARCHAR}, #{course9,jdbcType=VARCHAR}, 
+      #{course10,jdbcType=VARCHAR}, #{course11,jdbcType=VARCHAR}, #{course12,jdbcType=VARCHAR}, 
+      #{course13,jdbcType=VARCHAR}, #{course14,jdbcType=VARCHAR}, #{course15,jdbcType=VARCHAR}, 
+      #{course16,jdbcType=VARCHAR}, #{course17,jdbcType=VARCHAR}, #{course18,jdbcType=VARCHAR}, 
+      #{course19,jdbcType=VARCHAR}, #{course20,jdbcType=VARCHAR}, #{course21,jdbcType=VARCHAR}, 
+      #{course22,jdbcType=VARCHAR}, #{course23,jdbcType=VARCHAR}, #{course24,jdbcType=VARCHAR}, 
+      #{course25,jdbcType=VARCHAR}, #{course26,jdbcType=VARCHAR}, #{course27,jdbcType=VARCHAR}, 
+      #{course28,jdbcType=VARCHAR}, #{course29,jdbcType=VARCHAR}, #{course30,jdbcType=VARCHAR}, 
+      #{course31,jdbcType=VARCHAR}, #{course32,jdbcType=VARCHAR}, #{course33,jdbcType=VARCHAR}, 
+      #{course34,jdbcType=VARCHAR}, #{course35,jdbcType=VARCHAR}, #{course36,jdbcType=VARCHAR}, 
+      #{course37,jdbcType=VARCHAR}, #{course38,jdbcType=VARCHAR}, #{course39,jdbcType=VARCHAR}, 
+      #{course40,jdbcType=VARCHAR}, #{course41,jdbcType=VARCHAR}, #{course42,jdbcType=VARCHAR}, 
+      #{course43,jdbcType=VARCHAR}, #{course44,jdbcType=VARCHAR}, #{course45,jdbcType=VARCHAR}, 
+      #{course46,jdbcType=VARCHAR}, #{course47,jdbcType=VARCHAR}, #{course48,jdbcType=VARCHAR}, 
+      #{course49,jdbcType=VARCHAR}, #{course50,jdbcType=VARCHAR}, #{course51,jdbcType=VARCHAR}, 
+      #{course52,jdbcType=VARCHAR}, #{course53,jdbcType=VARCHAR}, #{course54,jdbcType=VARCHAR}, 
+      #{course55,jdbcType=VARCHAR}, #{course56,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wxplatform.pojo.NoCourseInfo">
+    insert into nocourse
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberid != null">
+        memberid,
+      </if>
+      <if test="membername != null">
+        membername,
+      </if>
+      <if test="departmentid != null">
+        departmentid,
+      </if>
+      <if test="course1 != null">
+        course1,
+      </if>
+      <if test="course2 != null">
+        course2,
+      </if>
+      <if test="course3 != null">
+        course3,
+      </if>
+      <if test="course4 != null">
+        course4,
+      </if>
+      <if test="course5 != null">
+        course5,
+      </if>
+      <if test="course6 != null">
+        course6,
+      </if>
+      <if test="course7 != null">
+        course7,
+      </if>
+      <if test="course8 != null">
+        course8,
+      </if>
+      <if test="course9 != null">
+        course9,
+      </if>
+      <if test="course10 != null">
+        course10,
+      </if>
+      <if test="course11 != null">
+        course11,
+      </if>
+      <if test="course12 != null">
+        course12,
+      </if>
+      <if test="course13 != null">
+        course13,
+      </if>
+      <if test="course14 != null">
+        course14,
+      </if>
+      <if test="course15 != null">
+        course15,
+      </if>
+      <if test="course16 != null">
+        course16,
+      </if>
+      <if test="course17 != null">
+        course17,
+      </if>
+      <if test="course18 != null">
+        course18,
+      </if>
+      <if test="course19 != null">
+        course19,
+      </if>
+      <if test="course20 != null">
+        course20,
+      </if>
+      <if test="course21 != null">
+        course21,
+      </if>
+      <if test="course22 != null">
+        course22,
+      </if>
+      <if test="course23 != null">
+        course23,
+      </if>
+      <if test="course24 != null">
+        course24,
+      </if>
+      <if test="course25 != null">
+        course25,
+      </if>
+      <if test="course26 != null">
+        course26,
+      </if>
+      <if test="course27 != null">
+        course27,
+      </if>
+      <if test="course28 != null">
+        course28,
+      </if>
+      <if test="course29 != null">
+        course29,
+      </if>
+      <if test="course30 != null">
+        course30,
+      </if>
+      <if test="course31 != null">
+        course31,
+      </if>
+      <if test="course32 != null">
+        course32,
+      </if>
+      <if test="course33 != null">
+        course33,
+      </if>
+      <if test="course34 != null">
+        course34,
+      </if>
+      <if test="course35 != null">
+        course35,
+      </if>
+      <if test="course36 != null">
+        course36,
+      </if>
+      <if test="course37 != null">
+        course37,
+      </if>
+      <if test="course38 != null">
+        course38,
+      </if>
+      <if test="course39 != null">
+        course39,
+      </if>
+      <if test="course40 != null">
+        course40,
+      </if>
+      <if test="course41 != null">
+        course41,
+      </if>
+      <if test="course42 != null">
+        course42,
+      </if>
+      <if test="course43 != null">
+        course43,
+      </if>
+      <if test="course44 != null">
+        course44,
+      </if>
+      <if test="course45 != null">
+        course45,
+      </if>
+      <if test="course46 != null">
+        course46,
+      </if>
+      <if test="course47 != null">
+        course47,
+      </if>
+      <if test="course48 != null">
+        course48,
+      </if>
+      <if test="course49 != null">
+        course49,
+      </if>
+      <if test="course50 != null">
+        course50,
+      </if>
+      <if test="course51 != null">
+        course51,
+      </if>
+      <if test="course52 != null">
+        course52,
+      </if>
+      <if test="course53 != null">
+        course53,
+      </if>
+      <if test="course54 != null">
+        course54,
+      </if>
+      <if test="course55 != null">
+        course55,
+      </if>
+      <if test="course56 != null">
+        course56,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberid != null">
+        #{memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="membername != null">
+        #{membername,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null">
+        #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="course1 != null">
+        #{course1,jdbcType=VARCHAR},
+      </if>
+      <if test="course2 != null">
+        #{course2,jdbcType=VARCHAR},
+      </if>
+      <if test="course3 != null">
+        #{course3,jdbcType=VARCHAR},
+      </if>
+      <if test="course4 != null">
+        #{course4,jdbcType=VARCHAR},
+      </if>
+      <if test="course5 != null">
+        #{course5,jdbcType=VARCHAR},
+      </if>
+      <if test="course6 != null">
+        #{course6,jdbcType=VARCHAR},
+      </if>
+      <if test="course7 != null">
+        #{course7,jdbcType=VARCHAR},
+      </if>
+      <if test="course8 != null">
+        #{course8,jdbcType=VARCHAR},
+      </if>
+      <if test="course9 != null">
+        #{course9,jdbcType=VARCHAR},
+      </if>
+      <if test="course10 != null">
+        #{course10,jdbcType=VARCHAR},
+      </if>
+      <if test="course11 != null">
+        #{course11,jdbcType=VARCHAR},
+      </if>
+      <if test="course12 != null">
+        #{course12,jdbcType=VARCHAR},
+      </if>
+      <if test="course13 != null">
+        #{course13,jdbcType=VARCHAR},
+      </if>
+      <if test="course14 != null">
+        #{course14,jdbcType=VARCHAR},
+      </if>
+      <if test="course15 != null">
+        #{course15,jdbcType=VARCHAR},
+      </if>
+      <if test="course16 != null">
+        #{course16,jdbcType=VARCHAR},
+      </if>
+      <if test="course17 != null">
+        #{course17,jdbcType=VARCHAR},
+      </if>
+      <if test="course18 != null">
+        #{course18,jdbcType=VARCHAR},
+      </if>
+      <if test="course19 != null">
+        #{course19,jdbcType=VARCHAR},
+      </if>
+      <if test="course20 != null">
+        #{course20,jdbcType=VARCHAR},
+      </if>
+      <if test="course21 != null">
+        #{course21,jdbcType=VARCHAR},
+      </if>
+      <if test="course22 != null">
+        #{course22,jdbcType=VARCHAR},
+      </if>
+      <if test="course23 != null">
+        #{course23,jdbcType=VARCHAR},
+      </if>
+      <if test="course24 != null">
+        #{course24,jdbcType=VARCHAR},
+      </if>
+      <if test="course25 != null">
+        #{course25,jdbcType=VARCHAR},
+      </if>
+      <if test="course26 != null">
+        #{course26,jdbcType=VARCHAR},
+      </if>
+      <if test="course27 != null">
+        #{course27,jdbcType=VARCHAR},
+      </if>
+      <if test="course28 != null">
+        #{course28,jdbcType=VARCHAR},
+      </if>
+      <if test="course29 != null">
+        #{course29,jdbcType=VARCHAR},
+      </if>
+      <if test="course30 != null">
+        #{course30,jdbcType=VARCHAR},
+      </if>
+      <if test="course31 != null">
+        #{course31,jdbcType=VARCHAR},
+      </if>
+      <if test="course32 != null">
+        #{course32,jdbcType=VARCHAR},
+      </if>
+      <if test="course33 != null">
+        #{course33,jdbcType=VARCHAR},
+      </if>
+      <if test="course34 != null">
+        #{course34,jdbcType=VARCHAR},
+      </if>
+      <if test="course35 != null">
+        #{course35,jdbcType=VARCHAR},
+      </if>
+      <if test="course36 != null">
+        #{course36,jdbcType=VARCHAR},
+      </if>
+      <if test="course37 != null">
+        #{course37,jdbcType=VARCHAR},
+      </if>
+      <if test="course38 != null">
+        #{course38,jdbcType=VARCHAR},
+      </if>
+      <if test="course39 != null">
+        #{course39,jdbcType=VARCHAR},
+      </if>
+      <if test="course40 != null">
+        #{course40,jdbcType=VARCHAR},
+      </if>
+      <if test="course41 != null">
+        #{course41,jdbcType=VARCHAR},
+      </if>
+      <if test="course42 != null">
+        #{course42,jdbcType=VARCHAR},
+      </if>
+      <if test="course43 != null">
+        #{course43,jdbcType=VARCHAR},
+      </if>
+      <if test="course44 != null">
+        #{course44,jdbcType=VARCHAR},
+      </if>
+      <if test="course45 != null">
+        #{course45,jdbcType=VARCHAR},
+      </if>
+      <if test="course46 != null">
+        #{course46,jdbcType=VARCHAR},
+      </if>
+      <if test="course47 != null">
+        #{course47,jdbcType=VARCHAR},
+      </if>
+      <if test="course48 != null">
+        #{course48,jdbcType=VARCHAR},
+      </if>
+      <if test="course49 != null">
+        #{course49,jdbcType=VARCHAR},
+      </if>
+      <if test="course50 != null">
+        #{course50,jdbcType=VARCHAR},
+      </if>
+      <if test="course51 != null">
+        #{course51,jdbcType=VARCHAR},
+      </if>
+      <if test="course52 != null">
+        #{course52,jdbcType=VARCHAR},
+      </if>
+      <if test="course53 != null">
+        #{course53,jdbcType=VARCHAR},
+      </if>
+      <if test="course54 != null">
+        #{course54,jdbcType=VARCHAR},
+      </if>
+      <if test="course55 != null">
+        #{course55,jdbcType=VARCHAR},
+      </if>
+      <if test="course56 != null">
+        #{course56,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteByMemberid" parameterType="java.lang.String">
+    delete from nocourse
+    where memberid = #{memberid,jdbcType=VARCHAR}
+  </delete>
+</mapper>

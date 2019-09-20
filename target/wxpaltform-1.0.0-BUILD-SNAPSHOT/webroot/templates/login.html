@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/webroot/js/jquery.min.js"></script>
+    <srcipt  src="/webroot/js/jquery.form.js"></srcipt>
+   >
+
+</head>
+<body>
+<form id="login" method="#">
+    <p><input type="text" name="username" value="" placeholder="账号"></p>
+    <p><input type="password" name="password" value="" placeholder="密码"></p>
+    <input type="button" value="登录" onclick="login()">
+</form>
+
+<script type="text/javascript">
+    function login() {
+        $.ajax({
+            async:false,
+            type:'POST',
+            dateType:'JSON',
+            contentType : "application/x-www-form-urlencoded",
+            url:"/txbackstage/login",
+            data:$('#login').serialize(),
+            success:function(result) {
+                alert(result.code + ":" + result.data);
+            },
+        });
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+      http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd"
+
+       >
+
+    <!--配置DI注解解析器
+        @Value 代替常量值注入
+        @AutoWired  代替DI注入  property中的ref
+        @Qualifier  规定依赖对象按照 bean 的 id 和类型的组合方式去找 可以和AutoWired搭配使用
+        @Resource[(name="bean的id")]   代替DI注入
+    -->
+    <context:annotation-config/>
+    <task:annotation-driven/>
+    <!--IOC注解解析器
+    注解所标注的类，如@Component(组件)
+                      @Service（服务）
+                      @Controller（控制器）
+                      @Repository（数据仓库）-->
+    <context:component-scan base-package="common.*"/>
+    <context:component-scan base-package="com.wxplatform"/>
+
+    <!--属性文件的导入
+    property-placeholder 占位符 能用$符号
+		     system-properties-mode="NEVER"     不从系统中查找相对应的value
+		      ignore-unresolvable="true"        忽略重复解析的情况
+    -->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:*.properties"/>
+
+
+    <!--装载自动获取ApplicationContext类，方便容器启动时加载Bean-->
+     <bean name="SpringGetBeanUtils" class="common.utils.otherUtils.SpringGetBeanUtils"/>
+     <bean name="concurrentSkipListMap" class="java.util.concurrent.ConcurrentSkipListMap"/>
+      <bean name="map" class="java.util.HashMap"/>
+     <bean name="wxMemberDAO" class="com.wxplatform.dao.impl.WxMemberDAOImpl"/>
+
+
+    <!--Mybatis的SessionFactory配置-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.wxplatform.pojo" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <!--分页插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                            reasonable=true
+                            supportMethodsArguments=true
+                            params=count=countSql
+                            autoRuntimeDialect=true
+
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+
+    </bean>
+
+    <!--&lt;!&ndash; 国际化信息 &ndash;&gt;-->
+    <!--<bean id="localeResolver"-->
+          <!--class="org.springframework.web.servlet.i18n.SessionLocaleResolver">-->
+        <!--<property name="defaultLocale" value="_en" />-->
+    <!--</bean>-->
+    <!--<bean id="messageSource"-->
+          <!--class="org.springframework.context.support.ResourceBundleMessageSource">-->
+        <!--<property name="basenames" >-->
+          <!--<list>-->
+              <!--<value>message</value>-->
+          <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+
+    <!--<bean-->
+            <!--class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
+        <!--<property name="staticMethod" value="common.utils.NotNullCheckUtils.setMessageSource" />-->
+        <!--&lt;!&ndash; 这里配置参数 &ndash;&gt;-->
+        <!--<property name="arguments" ref="messageSource">-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;failException配置&ndash;&gt;-->
+    <!--<bean-->
+            <!--class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
+        <!--<property name="staticMethod" value="common.utils.FailCheckUtils.setMessageSource" />-->
+        <!--&lt;!&ndash; 这里配置参数 &ndash;&gt;-->
+        <!--<property name="arguments" ref="messageSource">-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--Mybatis的Mapper文件识别-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.wxplatform.mapper"/>
+    </bean>
+
+    <!--引入shiro配置
+     也可以在web.xml中的contextConfigLocation写入该配置文件
+    -->
+    <import resource="classpath:xml/spring-shiro.xml"/>
+    <!--引入jdbc、redis配置文件-->
+    <import resource="classpath:xml/spring-jdbc.xml"/>
+    <import resource="classpath:xml/spring-redis.xml"/>
+</beans>

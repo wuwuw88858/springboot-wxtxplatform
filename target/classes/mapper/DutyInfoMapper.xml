@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxplatform.mapper.DutyInfoMapper">
+  <resultMap id="BaseResultMap" type="com.wxplatform.pojo.DutyInfo">
+    <id column="dutyid" jdbcType="VARCHAR" property="dutyid" />
+    <result column="memberid" jdbcType="VARCHAR" property="memberid" />
+    <result column="dutyxqday" jdbcType="VARCHAR" property="dutyxqday" />
+    <result column="dutybegintime" jdbcType="VARCHAR" property="dutybegintime" />
+    <result column="dutyendtime" jdbcType="VARCHAR" property="dutyendtime" />
+    <result column="week" jdbcType="INTEGER" property="week" />
+    <result column="other2" jdbcType="VARCHAR" property="other2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    dutyid, memberid, dutyxqday, dutybegintime, dutyendtime, week, other2
+  </sql>
+  <select id="selectByExample" parameterType="com.wxplatform.pojo.DutyInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dutyinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dutyinfo
+    where dutyid = #{dutyid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectDuttyCount" resultType="java.lang.Integer">
+    select count(*) count from dutyinfo where
+    week =#{week, jdbcType=INTEGER} AND dutyxqday = #{dutyxqday, jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectDuttyListCount" resultType="java.lang.Integer">
+  select count(*) count from dutyinfo;
+</select>
+  <select id="selectDuttyMemberCount" resultType="java.lang.Integer">
+    select count(*) count from dutyinfo where memberid = #{memberid,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dutyinfo
+    where dutyid = #{dutyid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wxplatform.pojo.DutyInfo">
+    insert into dutyinfo (dutyid, memberid, dutyxqday, 
+      dutybegintime, dutyendtime, week,
+      other2)
+    values (#{dutyid,jdbcType=VARCHAR}, #{memberid,jdbcType=VARCHAR}, #{dutyxqday,jdbcType=VARCHAR}, 
+      #{dutybegintime,jdbcType=VARCHAR}, #{dutyendtime,jdbcType=VARCHAR}, #{week,jdbcType=INTEGER},
+      #{other2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wxplatform.pojo.DutyInfo">
+    insert into dutyinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dutyid != null">
+        dutyid,
+      </if>
+      <if test="memberid != null">
+        memberid,
+      </if>
+      <if test="dutyxqday != null">
+        dutyxqday,
+      </if>
+      <if test="dutybegintime != null">
+        dutybegintime,
+      </if>
+      <if test="dutyendtime != null">
+        dutyendtime,
+      </if>
+      <if test="week != null">
+        week,
+      </if>
+      <if test="other2 != null">
+        other2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dutyid != null">
+        #{dutyid,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null">
+        #{memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyxqday != null">
+        #{dutyxqday,jdbcType=VARCHAR},
+      </if>
+      <if test="dutybegintime != null">
+        #{dutybegintime,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyendtime != null">
+        #{dutyendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="week != null">
+        #{week,jdbcType=INTEGER},
+      </if>
+      <if test="other2 != null">
+        #{other2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertDutyInfo" parameterType="java.util.List">
+    insert into dutyinfo (dutyid, memberid, dutyxqday, dutybegintime, dutyendtime, week) values
+    <foreach collection="dutyInfoList" item="item" separator=",">
+      (#{item.dutyid,jdbcType=VARCHAR}, #{item.memberid,jdbcType=VARCHAR}, #{item.dutyxqday,jdbcType=VARCHAR},
+      #{item.dutybegintime,jdbcType=VARCHAR}, #{item.dutyendtime,jdbcType=VARCHAR}, #{item.week,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wxplatform.pojo.DutyInfo">
+    update dutyinfo
+    <set>
+      <if test="memberid != null">
+        memberid = #{memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyxqday != null">
+        dutyxqday = #{dutyxqday,jdbcType=VARCHAR},
+      </if>
+      <if test="dutybegintime != null">
+        dutybegintime = #{dutybegintime,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyendtime != null">
+        dutyendtime = #{dutyendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="week != null">
+        week = #{week,jdbcType=INTEGER},
+      </if>
+      <if test="other2 != null">
+        other2 = #{other2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dutyid = #{dutyid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wxplatform.pojo.DutyInfo">
+    update dutyinfo
+    set memberid = #{memberid,jdbcType=VARCHAR},
+      dutyxqday = #{dutyxqday,jdbcType=VARCHAR},
+      dutybegintime = #{dutybegintime,jdbcType=VARCHAR},
+      dutyendtime = #{dutyendtime,jdbcType=VARCHAR},
+      week = #{week,jdbcType=INTEGER},
+      other2 = #{other2,jdbcType=VARCHAR}
+    where dutyid = #{dutyid,jdbcType=VARCHAR}
+  </update>
+
+  <delete id="deleteByMemberid" parameterType="java.lang.String">
+    delete from dutyinfo
+    where memberid = #{memberid,jdbcType=VARCHAR}
+  </delete>
+</mapper>
